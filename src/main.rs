@@ -7,7 +7,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 #[cfg(test)]
 mod tests {
     use crate::advent;
-    use crate::{first_and_last_num, first_and_last_num_int_n_txt, valid_game};
 
     #[test]
     fn test_advent_day_1_part_1() {
@@ -16,7 +15,7 @@ mod tests {
         let mut sum: u128 = 0;
 
         for line in data.lines() {
-            let nums = first_and_last_num(line).unwrap();
+            let nums = crate::first_and_last_num(line).unwrap();
             let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
             sum += combined;
         }
@@ -31,7 +30,7 @@ mod tests {
         let mut sum: u128 = 0;
 
         for line in data.lines() {
-            let nums = first_and_last_num_int_n_txt(line).unwrap();
+            let nums = crate::first_and_last_num_int_n_txt(line).unwrap();
             let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
             sum += combined;
         }
@@ -54,7 +53,7 @@ mod tests {
         let mut sum = 0;
 
         for line in data {
-            let nums = first_and_last_num_int_n_txt(line).unwrap();
+            let nums = crate::first_and_last_num_int_n_txt(line).unwrap();
             let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
             sum += combined;
         }
@@ -72,22 +71,22 @@ mod tests {
             "zoneight234",      // 14
         ];
 
-        let nums = first_and_last_num_int_n_txt(data[0]).unwrap();
+        let nums = crate::first_and_last_num_int_n_txt(data[0]).unwrap();
 
         assert_eq!(nums, (1, 1));
 
-        let nums = first_and_last_num_int_n_txt(data[1]).unwrap();
+        let nums = crate::first_and_last_num_int_n_txt(data[1]).unwrap();
 
         assert_eq!(nums, (3, 8));
 
-        let nums = first_and_last_num_int_n_txt(data[2]).unwrap();
+        let nums = crate::first_and_last_num_int_n_txt(data[2]).unwrap();
 
         assert_eq!(nums, (1, 4));
 
         let mut sum = 0;
 
         for line in data {
-            let nums = first_and_last_num_int_n_txt(line).unwrap();
+            let nums = crate::first_and_last_num_int_n_txt(line).unwrap();
             let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
             sum += combined;
         }
@@ -114,7 +113,7 @@ mod tests {
 
             // only 12 red cubes, 13 green cubes, and 14 blue cubes
             let rules = crate::GameRules { red: 12, green: 13, blue: 14 };
-            if valid_game(crate::Game::new(&game), rules) {
+            if crate::valid_game(crate::Game::new(&game), rules) {
                 valid_ids.push(id.to_string().parse::<usize>().unwrap());
             }
         }
