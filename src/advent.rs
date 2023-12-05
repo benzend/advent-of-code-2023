@@ -1,12 +1,15 @@
 use std::fs;
 
 pub fn get_input(day: AdventDay, part: Option<AdventPart>) -> Result<String, std::io::Error> {
-    fs::read_to_string(format!("./data/day-{}-part-{}.txt", day, part.unwrap_or_default()))
+    fs::read_to_string(format!(
+        "./data/day-{}-part-{}.txt",
+        day,
+        part.unwrap_or_default()
+    ))
 }
 
-
 pub struct AdventDay {
-    pub value: usize
+    pub value: usize,
 }
 
 impl AdventDay {
@@ -22,7 +25,7 @@ impl std::fmt::Display for AdventDay {
 }
 
 pub struct AdventPart {
-    pub value: usize
+    pub value: usize,
 }
 
 impl AdventPart {
