@@ -102,3 +102,94 @@ fn find_last_num_int_or_txt(s: &str) -> Option<String> {
     }
     None
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::advent;
+
+    #[test]
+    fn test_advent_day_1_part_1() {
+        let data = advent::get_input(advent::AdventDay::new(1), None).unwrap();
+
+        let mut sum: u128 = 0;
+
+        for line in data.lines() {
+            let nums = crate::day_1::first_and_last_num(line).unwrap();
+            let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
+            sum += combined;
+        }
+
+        assert_eq!(sum, 55017);
+    }
+
+    #[test]
+    fn test_advent_day_1_part_2() {
+        let data = advent::get_input(advent::AdventDay::new(1), None).unwrap();
+
+        let mut sum: u128 = 0;
+
+        for line in data.lines() {
+            let nums = crate::day_1::first_and_last_num_int_n_txt(line).unwrap();
+            let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
+            sum += combined;
+        }
+
+        assert_eq!(sum, 53539);
+    }
+
+    #[test]
+    fn test_advent_day_1_part_2_example() {
+        let data = vec![
+            "two1nine",
+            "eightwothree",
+            "abcone2threexyz",
+            "xtwone3four",
+            "4nineeightseven2",
+            "zoneight234",
+            "7pqrstsixteen",
+        ];
+
+        let mut sum = 0;
+
+        for line in data {
+            let nums = crate::day_1::first_and_last_num_int_n_txt(line).unwrap();
+            let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
+            sum += combined;
+        }
+
+        assert_eq!(sum, 281);
+    }
+
+    #[test]
+    fn test_advent_day_1_part_2_combined_str_nums() {
+        let data = vec![
+            "1threetwone",      // 11
+            "hhc3four88",       // 38
+            "oneightfour",      // 14
+            "4nineeightseven2", // 42
+            "zoneight234",      // 14
+        ];
+
+        let nums = crate::day_1::first_and_last_num_int_n_txt(data[0]).unwrap();
+
+        assert_eq!(nums, (1, 1));
+
+        let nums = crate::day_1::first_and_last_num_int_n_txt(data[1]).unwrap();
+
+        assert_eq!(nums, (3, 8));
+
+        let nums = crate::day_1::first_and_last_num_int_n_txt(data[2]).unwrap();
+
+        assert_eq!(nums, (1, 4));
+
+        let mut sum = 0;
+
+        for line in data {
+            let nums = crate::day_1::first_and_last_num_int_n_txt(line).unwrap();
+            let combined = format!("{}{}", nums.0, nums.1).parse::<u128>().unwrap();
+            sum += combined;
+        }
+
+        assert_eq!(sum, 11 + 38 + 14 + 42 + 14);
+    }
+}
